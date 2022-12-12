@@ -1,13 +1,12 @@
-import requests
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-
-@app.route('/', methods=['POST'])
-def getInfo():
-    dataparser = request.get_data()
-
+@app.route("/", methods=['GET', 'POST'])
+def index():
+    data = request.get_data()
+    return "OK"
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
