@@ -5,7 +5,8 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def index():
     data = request.get_data()
-    return "OK"
+    print(data)
+    return data
     
 
 if __name__ == '__main__':
