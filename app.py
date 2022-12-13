@@ -49,12 +49,12 @@ def index():
                 ttUa = tUA[i]
                 ttRu = tRU[i]
                 if ttUA['conf'] < ttRu['conf']:
-                    arr.append(ttRu['word'])
+                    arrRU.append(ttRu['word'])
                     translation.append(translator.translate(ttRu['word']))
     
     return make_response(
         jsonify(
-            {"ruword": arr, "uaword": translation }
+            {"ruword": 'прєвєт', "uaword": 'привіт' }
         ), 200
     )
         
