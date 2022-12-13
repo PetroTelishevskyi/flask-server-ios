@@ -3,13 +3,21 @@ from flask import Flask, request
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file', filename=filename))
+def index():
+    if request.method == "POST":
+        print("FORM DATA RECEIVED")
+    
+        if "file" not in request.files:
+            return redirect(request.url)
+
+        file = request.files["file"]
+        if file.filename == "":
+            return redirect(request.url)
+        
+    
+    return 'OK'
+        
+
 
 if __name__ == '__main__':
     app.run(debug=True)
