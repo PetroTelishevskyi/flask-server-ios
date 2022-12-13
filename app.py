@@ -10,10 +10,10 @@ def index():
     if request.method == "POST":
         print("FORM DATA RECEIVED")
     
-        if "file" not in request.files:
+        if "recording" not in request.files:
             return redirect(request.url)
 
-        file = request.files["file"]
+        file = request.files["recording"]
         if file.filename == "":
             return redirect(request.url)
         
