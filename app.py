@@ -17,9 +17,6 @@ def index():
         if file.filename == "":
             return redirect(request.url)
         
-        if file:
-            song = AudioSegment.from_file(file, format="mp4")
-            song.export("filename.mp3", format="mp3")
           
     return make_response(
         jsonify(
