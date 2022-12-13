@@ -1,44 +1,31 @@
-from flask import Flask, request, redirect, jsonify, make_response, url_for
-from werkzeug.utils import secure_filename
+from flask import Flask, request, redirect, jsonify, make_response
 from vosk import Model, KaldiRecognizer
 from pydub import AudioSegment
 from translate import Translator
-
-UPLOAD_FOLDER = './flask server'
-ALLOWED_EXTENSIONS = {'m4a'}
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/", methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'recording' not in request.files:
-            print('No file part')
+def index():
+    
+    if request.method == "POST":
+        print("FORM DATA RECEIVED")
+    
+        if "file" not in request.files:
             return redirect(request.url)
-        file = request.files['recording']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            print('No selected file')
+
+        file = request.files["file"]
+        if file.filename == "":
             return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
         
+        if file:
+            song = AudioSegment.from_file(file, format="mp4")
+            song.export("filename.mp3", format="mp3")
           
-        
     return make_response(
-            jsonify(
-                        {"ruword": 'прєвєт', "uaword": 'привіт', 'song': filename}
-                    ), 200
-            )
+        jsonify(
+            {"ruword": 'прєвєт', "uaword": 'привіт' }
+        ), 200
+    )
         
 
 
