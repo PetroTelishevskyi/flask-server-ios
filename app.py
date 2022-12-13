@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
     
     if request.method == "POST":
-        print("FORM DATA RECEIVED")
+        flash("FORM DATA RECEIVED")
     
         if "file" not in request.files:
             return redirect(request.url)
@@ -23,7 +23,7 @@ def index():
           
     return make_response(
         jsonify(
-            {"ruword": 'прєвєт', "uaword": 'привіт', 'song': song}
+            {"ruword": 'прєвєт', "uaword": 'привіт'}
         ), 200
     )
         
