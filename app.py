@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, make_response,flash
+from flask import Flask, request, redirect, jsonify, make_response
 from vosk import Model, KaldiRecognizer
 from pydub import AudioSegment
 from translate import Translator
@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
     
     if request.method == "POST":
-        flash("FORM DATA RECEIVED")
+        print("FORM DATA RECEIVED")
     
         if "file" not in request.files:
             return redirect(request.url)
