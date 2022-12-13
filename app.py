@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify
+from flask import Flask, request, redirect, jsonify, make_response
 from vosk import Model, KaldiRecognizer
 from pydub import AudioSegment
 from translate import Translator
@@ -52,7 +52,11 @@ def index():
                     arr.append(ttRu['word'])
                     translation.append(translator.translate(ttRu['word']))
     
-    return arrRU[0]
+    return make_response(
+        jsonify(
+            {"ruword": arr, "uaword": translation }
+        ), 200
+    )
         
 
 
