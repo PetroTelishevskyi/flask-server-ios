@@ -36,7 +36,7 @@ def upload_file():
         
     return make_response(
             jsonify(
-                        {"ruword": 'прєвєт', "uaword": 'привіт', 'song': file}
+                        {"ruword": 'прєвєт', "uaword": 'привіт', 'song': filename}
                     ), 200
             )
         
